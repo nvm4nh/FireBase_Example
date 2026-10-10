@@ -1,19 +1,25 @@
-package vn.edu.ueh.thanhdnh.firebase_example;
+﻿package vn.edu.ueh.thanhdnh.firebase_example;
+
+import com.google.firebase.firestore.Exclude;
 
 public class Article {
   private String id;
   private String title;
   private String content;
 
+  public Article() {}
+
   public Article(String title, String content) {
     this.title = title;
     this.content = content;
   }
 
+  @Exclude
   public String getId() {
     return id;
   }
 
+  @Exclude
   public void setId(String id) {
     this.id = id;
   }
@@ -32,14 +38,5 @@ public class Article {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  @Override
-  public String toString() {
-    return "Article{" +
-      "id='" + id + '\'' +
-      ", title='" + title + '\'' +
-      ", content='" + content + '\'' +
-      '}';
   }
 }
