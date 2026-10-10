@@ -1,10 +1,7 @@
 package vn.edu.ueh.thanhdnh.firebase_example;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,8 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +20,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ShowDataActivity extends AppCompatActivity {
     FirebaseFirestore db;
@@ -51,21 +45,22 @@ public class ShowDataActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-      db.collection("articles").addSnapshotListener(new EventListener<QuerySnapshot>() {
-        @Override
-        public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException error) {
-          if (snapshots != null) {
-            articles.clear();
-            for (QueryDocumentSnapshot q : snapshots) {
-              Map<String, Object> data = q.getData();
-              Article article = new Article((String) data.get("title"), (String) data.get("content"));
-              article.setId(q.getId());
-              articles.add(article);
+        db.collection("articles").addSnapshotListener((snapshots, error) -> {
+            if (snapshots != null) {
+                articles.clear();
+                for (QueryDocumentSnapshot q : snapshots) {
+                    Map<String, Object> data = q.getData();
+                    String title = data.containsKey("title") ? (String) data.get("title") : "";
+                    String content = data.containsKey("content") ? (String) data.get("content") : "";
+                    String imageUrl = data.containsKey("imageUrl") ? (String) data.get("imageUrl") : "";
+                    
+                    Article article = new Article(title, content, imageUrl);
+                    article.setId(q.getId());
+                    articles.add(article);
+                }
+                adapter.update(articles);
+                adapter.notifyDataSetChanged();
             }
-            adapter.update(articles);
-            adapter.notifyDataSetChanged();
-          }
-        }
-      });
+        });
     }
 }

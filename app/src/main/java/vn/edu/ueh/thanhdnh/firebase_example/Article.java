@@ -6,12 +6,14 @@ public class Article {
   private String id;
   private String title;
   private String content;
+  private String imageUrl;
 
   public Article() {}
 
-  public Article(String title, String content) {
+  public Article(String title, String content, String imageUrl) {
     this.title = title;
     this.content = content;
+    this.imageUrl = imageUrl;
   }
 
   @Exclude
@@ -38,5 +40,13 @@ public class Article {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 }

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -42,11 +43,22 @@ public class ArticleViewAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
     holder.getTxtTitle().setText(currentArticle.getTitle());
     holder.getTxtContent().setText(currentArticle.getContent());
 
+    if (currentArticle.getImageUrl() != null && !currentArticle.getImageUrl().isEmpty()) {
+        holder.getImgArticle().setVisibility(View.VISIBLE);
+        Glide.with(context)
+             .load(currentArticle.getImageUrl())
+             .centerCrop()
+             .into(holder.getImgArticle());
+    } else {
+        holder.getImgArticle().setVisibility(View.GONE);
+    }
+
     holder.itemView.setOnClickListener(v -> {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
         intent.putExtra("id", currentArticle.getId());
         intent.putExtra("title", currentArticle.getTitle());
         intent.putExtra("content", currentArticle.getContent());
+        intent.putExtra("imageUrl", currentArticle.getImageUrl());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     });
