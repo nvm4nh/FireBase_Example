@@ -20,17 +20,25 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edTitle = findViewById(R.id.ed_title);
     EditText edContent = findViewById(R.id.ed_content);
+    EditText edImageUrl = findViewById(R.id.ed_image_url);
     Button btnSave = findViewById(R.id.btn_save);
     Button btnShow = findViewById(R.id.btn_show);
 
     btnSave.setOnClickListener(view -> {
       String title = edTitle.getText().toString();
       String content = edContent.getText().toString();
-      Article article = new Article(title, content, "");
+      String imageUrl = edImageUrl.getText().toString();
+      
+      Article article = new Article(title, content, imageUrl);
 
       db.collection("articles")
         .add(article)
-        .addOnSuccessListener(documentReference -> Toast.makeText(getApplicationContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show())
+        .addOnSuccessListener(documentReference -> {
+            Toast.makeText(getApplicationContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
+            edTitle.setText("");
+            edContent.setText("");
+            edImageUrl.setText("");
+        })
         .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     });
 

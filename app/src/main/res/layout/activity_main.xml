@@ -11,7 +11,7 @@
         android:id="@+id/ed_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:inputType="text"
         android:hint="Title"
@@ -23,13 +23,25 @@
         android:id="@+id/ed_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="text"
         android:hint="Content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_title" />
+
+    <EditText
+        android:id="@+id/ed_image_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="textUri"
+        android:hint="Image URL (Tùy chọn)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ed_content" />
 
     <Button
         android:id="@+id/btn_save"
@@ -40,7 +52,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_show"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_content" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_image_url" />
 
     <Button
         android:id="@+id/btn_show"
@@ -51,6 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_save"
-        app:layout_constraintTop_toBottomOf="@+id/ed_content" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_image_url" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
