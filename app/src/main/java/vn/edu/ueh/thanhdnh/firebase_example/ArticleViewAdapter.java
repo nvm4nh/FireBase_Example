@@ -44,6 +44,7 @@ public class ArticleViewAdapter extends RecyclerView.Adapter<ArticleViewHolder> 
 
     holder.itemView.setOnClickListener(v -> {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
+        intent.putExtra("id", currentArticle.getId());
         intent.putExtra("title", currentArticle.getTitle());
         intent.putExtra("content", currentArticle.getContent());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
