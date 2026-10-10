@@ -1,4 +1,4 @@
-﻿package vn.edu.ueh.thanhdnh.firebase_example;
+package vn.edu.ueh.thanhdnh.firebase_example;
 
 import android.os.Bundle;
 import android.widget.TextView;

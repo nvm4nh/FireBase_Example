@@ -1,4 +1,4 @@
-﻿package vn.edu.ueh.thanhdnh.firebase_example;
+package vn.edu.ueh.thanhdnh.firebase_example;
 
 import com.google.firebase.firestore.Exclude;
 
